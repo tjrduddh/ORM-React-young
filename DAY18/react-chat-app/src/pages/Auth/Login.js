@@ -22,11 +22,11 @@ import { connect, useDispatch } from "react-redux";
 
 import { Link, useNavigate } from "react-router-dom";
 
-//리덕스내 정의된 해당 액션함수를 참조합니다.
-import { userLogin } from "../../redux/actions";
+// //리덕스내 정의된 해당 액션함수를 참조합니다.
+// import { userLogin } from "../../redux/actions";
 
-//백엔드통신을 위한 axios 참조하기
-import axios from "axios";
+// //백엔드통신을 위한 axios 참조하기
+// import axios from "axios";
 
 //formik은 리액트에서 form을 다루는 코드들을 쉽게 작성할 수 있도록 도와주는 패키지
 import { useFormik } from "formik";
@@ -39,10 +39,10 @@ import logodark from "../../assets/images/logo-dark.png";
 import logolight from "../../assets/images/logo-light.png";
 
 const Login = (props) => {
-  //전역 데이터공간 리듀서를 호출하기 위핸 액션함수를 디스패치로 호출하기위해 디스패치 상수를 정의합니다.
-  const globalDispatch = useDispatch();
+  // //전역 데이터공간 리듀서를 호출하기 위핸 액션함수를 디스패치로 호출하기위해 디스패치 상수를 정의합니다.
+  // const globalDispatch = useDispatch();
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   //폼 유효성검사 및 폼데이터처리
   const formik = useFormik({
@@ -56,42 +56,35 @@ const Login = (props) => {
     }),
     onSubmit: (values) => {
       //props.loginUser(values.email, values.password, props.router.navigate);
-
-      //STEP1: axios 기반으로 백엔드와 연동하여 로그인처리한다.
-      //STEP2: 메일주소와 암호가 다른경우에 대한 예외처리 와 정상 로그인시 발급된 토큰값을 웹브라우저의 로컬스토리지에 저장한다.
-      //STEP3: 로그인한 사용자 토큰정보를 리덕스 전역상태영역에 저장갱신한다.
-
-      var loginData = {
-        email: values.email,
-        password: values.password,
-      };
-
-      axios
-        .post("http://localhost:3005/api/member/login", loginData)
-        .then((res) => {
-          console.log("회원 로그인 처리 결과 반환값:", res.data);
-
-          if (res.data.code == "200") {
-            //step1: 사용자 웹브라우저의 저장공간인 localStorage공간에 서버에서 보내준 사용자인증 jwt토큰값을 영구보관한다.
-            window.localStorage.setItem("jwttoken", res.data.data.token);
-
-            //tip: 사용자 웹브라우저에 저장공간인 localStorage공간에 저장된 데이터를 불러오기
-            //const storageToken = window.localStorage.getItem("jwttoken");
-            //console.log("사용자 웹 브라우저에 저장된 JWT사용자토큰값:",storageToken);
-
-            //dispatch를 이용해 해당 액션함수를 호출해 해당 전역데이터에 관련정보를 업데이트한다.
-            globalDispatch(userLogin(res.data.data));
-
-            navigate("/dashboard");
-          }
-        })
-        .catch((err) => {
-          console.log("에러발생:", err);
-        });
+      //     //STEP1: axios 기반으로 백엔드와 연동하여 로그인처리한다.
+      //     //STEP2: 메일주소와 암호가 다른경우에 대한 예외처리 와 정상 로그인시 발급된 토큰값을 웹브라우저의 로컬스토리지에 저장한다.
+      //     //STEP3: 로그인한 사용자 토큰정보를 리덕스 전역상태영역에 저장갱신한다.
+      //     var loginData = {
+      //       email: values.email,
+      //       password: values.password,
+      //     };
+      //     axios
+      //       .post("http://localhost:3005/api/member/login", loginData)
+      //       .then((res) => {
+      //         console.log("회원 로그인 처리 결과 반환값:", res.data);
+      //         if (res.data.code == "200") {
+      //           //step1: 사용자 웹브라우저의 저장공간인 localStorage공간에 서버에서 보내준 사용자인증 jwt토큰값을 영구보관한다.
+      //           window.localStorage.setItem("jwttoken", res.data.data.token);
+      //           //tip: 사용자 웹브라우저에 저장공간인 localStorage공간에 저장된 데이터를 불러오기
+      //           //const storageToken = window.localStorage.getItem("jwttoken");
+      //           //console.log("사용자 웹 브라우저에 저장된 JWT사용자토큰값:",storageToken);
+      //           //dispatch를 이용해 해당 액션함수를 호출해 해당 전역데이터에 관련정보를 업데이트한다.
+      //           globalDispatch(userLogin(res.data.data));
+      //           navigate("/dashboard");
+      //         }
+      //       })
+      //       .catch((err) => {
+      //         console.log("에러발생:", err);
+      //       });
     },
   });
 
-  document.title = "로그인 페이지";
+  // document.title = "로그인 페이지";
 
   return (
     <React.Fragment>
