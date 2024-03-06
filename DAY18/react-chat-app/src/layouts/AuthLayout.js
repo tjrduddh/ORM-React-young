@@ -1,10 +1,10 @@
 import React from "react";
 
-const AuthLayout = () => {
+const AuthLayout = (props) => {
   return (
-    <div>
-      <h1>인증 페이지에서 호풀되는 인증 레이아웃 영역</h1>
-    </div>
+    <React.Fragment>
+      <div className="layout-wrapper d-lg-flex">{props.children}</div>
+    </React.Fragment>
   );
 };
 
